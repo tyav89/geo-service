@@ -6,7 +6,9 @@ import org.mockito.Mockito;
 import ru.netology.entity.Country;
 import ru.netology.entity.Location;
 import ru.netology.geo.GeoService;
+import ru.netology.geo.GeoServiceImpl;
 import ru.netology.i18n.LocalizationService;
+import ru.netology.i18n.LocalizationServiceImpl;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -22,11 +24,11 @@ class MessageSenderImplTest {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(key,"172.0.32.11");
 
-        GeoService geoServiceMock = Mockito.mock(GeoService.class);
+        GeoServiceImpl geoServiceMock = Mockito.mock(GeoServiceImpl.class);
         Mockito.when(geoServiceMock.byIp("172.0.32.11"))
                 .thenReturn(new Location("Moscow", Country.RUSSIA, null, 0));
 
-        LocalizationService localizationServiceMock = Mockito.mock(LocalizationService.class);
+        LocalizationServiceImpl localizationServiceMock = Mockito.mock(LocalizationServiceImpl.class);
         Mockito.when(localizationServiceMock.locale(Country.RUSSIA)).thenReturn("Добро пожаловать");
 
         messageSender = new MessageSenderImpl(geoServiceMock, localizationServiceMock);
@@ -42,11 +44,11 @@ class MessageSenderImplTest {
         Map<String, String> headers = new HashMap<String, String>();
         headers.put(key,"96.44.183.149");
 
-        GeoService geoServiceMock = Mockito.mock(GeoService.class);
+        GeoServiceImpl geoServiceMock = Mockito.mock(GeoServiceImpl.class);
         Mockito.when(geoServiceMock.byIp("96.44.183.149"))
                 .thenReturn(new Location("New York", Country.USA, null,  0));
 
-        LocalizationService localizationServiceMock = Mockito.mock(LocalizationService.class);
+        LocalizationServiceImpl localizationServiceMock = Mockito.mock(LocalizationServiceImpl.class);
         Mockito.when(localizationServiceMock.locale(Country.USA)).thenReturn("Welcome");
 
         messageSender = new MessageSenderImpl(geoServiceMock, localizationServiceMock);
